@@ -46,6 +46,26 @@
 
   window.toggleDataColumns = toggleDataColumns;
 
+  const filterTable = () => {
+    let input, filter, table, tr, td, i;
+    input = document.getElementsByClassName('search-box')[0];
+    filter = input.value.toUpperCase();
+    tr = document.getElementsByClassName('table-row-data');
+
+    for (let i = 0; i < tr.length; i++) {
+      td = tr[i].childNodes;
+      for (let j = 0; j < td.length; j++) {
+        if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+          td[j].parentNode.style.display = '';
+          td[j].parentNode.classList.add('show-data');
+          break;
+        } else {
+          td[j].parentNode.style.display = 'none';
+        }
+      }
+    }
+  }
+
   createDashboard();
 
 })();
