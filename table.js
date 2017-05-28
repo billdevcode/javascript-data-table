@@ -28,19 +28,7 @@
       title: 'Phone'
     }
   ];
-  let table, tr, th, td;
-
-  // const createShowAndHide = () => {
-  //   tr = document.createElement('tr');
-  //   tr.classList.add('table-row-data');
-  //
-  //   for (let i = 0; i < tableHeadings.length; i++) {
-  //     th = document.createElement('th');
-  //     th.appendChild(document.createTextNode('-'));
-  //     tr.appendChild(th);
-  //   }
-  //   table.appendChild(tr)
-  // }
+  let table, tr, th, td, input;
 
   const createTableHeadings = (keyForSort=null, sortClassName=null) => {
     tr = document.createElement('tr');
@@ -53,11 +41,19 @@
       th.style.backgroundImage = 'url("./assets/sort.png")';
       th.style.backgroundRepeat = 'no-repeat';
       th.style.backgroundPosition = 'right';
-      th.onclick = (ev) => {
+      th.onclick = (ev, key) => {
         clickToSortData(ev, tableHeadings[i].key);
       };
       if (keyForSort === tableHeadings[i].key && sortClassName) {
           th.classList.add(sortClassName);
+      }
+      inputs = document.getElementsByClassName('data-toggle');
+
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].checked = true;
+        inputs[i].onclick = (ev, key) => {
+          window.toggleDataColumns(ev, tableHeadings[i].key);
+        };
       }
       tr.appendChild(th);
     }
@@ -70,6 +66,8 @@
       tr.classList.add('table-row-data');
       for (let key in data[i]) {
         td = document.createElement('td');
+        td.classList.add(`${key}-data`);
+        td.classList.add('data-cell');
         td.appendChild(document.createTextNode(data[i][key]));
         tr.appendChild(td);
       }
