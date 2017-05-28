@@ -4,11 +4,19 @@ html, body {
 }
 
 .menu-dashboard {
-  height: 200px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.data-toggle-show-hide {
+  margin-bottom: 30px;
+}
+
+.data-toggle-show-hide span {
+  margin-right: 10px;
 }
 
 .search-box {
@@ -26,9 +34,14 @@ html, body {
 }
 
 .table-row-headings th {
-  padding: 10px;
+  position: relative;
+  padding: 20px;
   border: 1px solid gray;
   cursor: pointer;
+}
+
+.data-toggle {
+
 }
 
 .table-row-data td {
