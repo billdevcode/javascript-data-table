@@ -1,0 +1,42 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.menu-dashboard {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-box {
+  height: 30px;
+  width: 200px;
+  font-size: 20px;
+}
+
+.submit-button {
+
+}
+
+.data-table {
+  width: 100%;
+}
+
+.table-row-headings th {
+  padding: 10px;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.table-row-data td {
+  padding: 2px;
+  border: 1px solid silver;
+  text-align: center;
+}
+
+.table-row-data:nth-child(odd) {
+  background-color: linen;
+}
