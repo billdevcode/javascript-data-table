@@ -30,10 +30,9 @@
   ];
   let table, tr, th, td, input;
 
-  const createTableHeadings = (keyForSort=null, sortClassName=null) => {
+  const createTableHeadings = (sortClassName=null) => {
     tr = document.createElement('tr');
     tr.classList.add('table-row-headings');
-
     for (let i = 0; i < tableHeadings.length; i++) {
       th = document.createElement('th');
       th.appendChild(document.createTextNode(tableHeadings[i].title));
@@ -44,7 +43,7 @@
       th.onclick = (ev, key) => {
         clickToSortData(ev, tableHeadings[i].key);
       };
-      if (keyForSort === tableHeadings[i].key && sortClassName) {
+      if (sortClassName !== null) {
           th.classList.add(sortClassName);
       }
       inputs = document.getElementsByClassName('data-toggle');
@@ -84,10 +83,10 @@
     const heading = ev.currentTarget;
     clearTableData();
     if (heading.classList.contains('ascending')) {
-      createTableHeadings(key, 'descending');
+      createTableHeadings('descending');
       createTableFromData(sortDataDesc(key, jsonSampleData));
     } else {
-      createTableHeadings(key, 'ascending');
+      createTableHeadings('ascending');
       createTableFromData(sortDataAsc(key, jsonSampleData));
     }
   }
