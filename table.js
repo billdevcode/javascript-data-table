@@ -61,27 +61,17 @@
     table.appendChild(tr)
   }
 
-  const onFocusData = (cellData) => {
-    console.log(cellData);
-  }
+  const onBlurData = (ev) => {
+    const tableCell = ev.currentTarget;
+    const tableCellData = ev.currentTarget.innerHTML;
+    const tableRow = tableCell.parentNode.classList.value;
+    const splitClassNames = tableRow.split(' ');
+    const cellKey = tableCell.classList.value.split(' ')[1].split('-')[0]
+    const rowKey = splitClassNames[1].split('-')[1];
+    const rowNum = splitClassNames[2].split('-')[1];
 
-  const onBlurData = (cellData) => {
-    console.log(cellData);
-  }
-
-  const createTableFromData = (data) => {
-    for (let i = 0; i < data.length; i++) {
-      tr = document.createElement('tr');
-      tr.classList.add('table-row-data');
-      for (let key in data[i]) {
-        td = document.createElement('td');
-        td.classList.add(`${key}-data`);
-        td.classList.add('data-cell');
-        td.appendChild(document.createTextNode(data[i][key]));
-        td.contentEditable="true";
-        tr.appendChild(td);
-      }
-      table.appendChild(tr)
+    if (tableCellData !== paginationList[rowKey][rowNum-1][cellKey]) {
+      paginationList[rowKey][rowNum-1][cellKey] = tableCellData;
     }
   }
 
