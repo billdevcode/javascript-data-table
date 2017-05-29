@@ -1,6 +1,8 @@
 html, body {
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .menu-dashboard {
@@ -25,12 +27,9 @@ html, body {
   font-size: 20px;
 }
 
-.submit-button {
-
-}
-
 .data-table {
   width: 100%;
+  padding: 5px;
 }
 
 .table-row-headings th {
@@ -38,10 +37,6 @@ html, body {
   padding: 20px;
   border: 1px solid gray;
   cursor: pointer;
-}
-
-.data-toggle {
-
 }
 
 .table-row-data td {
@@ -52,4 +47,36 @@ html, body {
 
 .table-row-data:nth-child(odd) {
   background-color: linen;
+}
+
+.table-controls-bar {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-controls-pages,
+.table-controls {
+  margin-right: 10px;
+  padding: 10px;
+  outline: none;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+  color: darkslateblue;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.table-controls-pages--active {
+  background-color: silver;
+}
+
+.table-controls-previous {
+  float: left;
+}
+
+.table-controls-next {
+  float: right;
 }

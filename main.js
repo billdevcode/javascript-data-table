@@ -3,7 +3,6 @@ var cacheData = {};
 
 const sortDataAsc = (key, data) => {
   if (cacheData[key] && cacheData[key].asc) {
-    console.log(cacheData)
     sortedData = cacheData[key].asc;
   } else {
     sortedData = data.concat().sort( (a,b) => {
@@ -22,7 +21,6 @@ const sortDataAsc = (key, data) => {
 
 const sortDataDesc = (key, data) => {
   if (cacheData[key] && cacheData[key].desc) {
-    console.log(cacheData)
     sortedData = cacheData[key].desc;
   } else {
     sortedData = data.concat().sort( (a,b) => {
@@ -37,4 +35,30 @@ const sortDataDesc = (key, data) => {
     cacheData[key] = { desc: [].concat(sortedData) };
   }
   return sortedData;
+}
+
+const initPage1Button = () => {
+  let allPageButtons = document.getElementsByClassName('table-controls-pages');
+  for (let i = 0; i < allPageButtons.length; i++) {
+    allPageButtons[i].classList.remove('table-controls-pages--active');
+  }
+  let page1Button = document.getElementsByClassName('page-1')[0];
+  page1Button.classList.add('table-controls-pages--active');
+}
+
+const hidePreviousAndNextButtons = (pageNumber, buttonsLength) => {
+  let previousButton = document.getElementsByClassName('table-controls-previous')[0];
+  let nextButton = document.getElementsByClassName('table-controls-next')[0];
+
+  if (pageNumber === '1') {
+    previousButton.style.visibility = 'hidden';
+  } else {
+    previousButton.style.visibility = 'visible';
+  }
+
+  if (pageNumber === buttonsLength.toString()) {
+    nextButton.style.visibility = 'hidden';
+  } else {
+    nextButton.style.visibility = 'visible';
+  }
 }
