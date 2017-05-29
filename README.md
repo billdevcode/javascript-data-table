@@ -24,7 +24,7 @@ This is a challenge to build a data table using vanilla JavaScript (no libraries
 - There are definitely accomplishments and hurdles while each user story required research, tinkering and creative approaches.
 - The one I'm most proud of is the **search** feature.
 - If we're dealing with individual table cells then it would have been simple but we're dealing with each row with multiple columns so the early iteration code would only take the last column as the final show or hide condition.
-- After some tinkering, ![lightbulb](./assets/lightbulb.png =20) I thought of using `break` to stop the loop as long as any row's table cell qualifies to be visible.
+- After some tinkering, <img src="./assets/lightbulb.png" width="30"> I thought of using `break` to stop the loop as long as any row's table cell qualifies to be visible.
 
 ## License
 
