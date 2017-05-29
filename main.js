@@ -63,3 +63,18 @@ const hidePreviousAndNextButtons = (pageNumber, buttonsLength) => {
     nextButton.style.visibility = 'visible';
   }
 };
+
+const goToPreviousPage = (ev) => {
+  resetForm();
+  const activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
+  const previousPage = document.getElementsByClassName(`page-${activePage-1}`)[0];
+  previousPage.click();
+};
+
+const goToNextPage = (ev) => {
+  resetForm();
+  let activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
+  activePage = parseInt(activePage);
+  const nextPage = document.getElementsByClassName(`page-${activePage+1}`)[0];
+  nextPage.click();
+};

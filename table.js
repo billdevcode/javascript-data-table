@@ -10,6 +10,7 @@
     { key: 'office', title: 'Office' },
     { key: 'phone', title: 'Phone' }
   ];
+  // NOTE set paginationRow to the desired rows per page
   const paginationRow = 10;
   const paginationList = {};
   let table, tr, th, td, input, div, span, btn;
@@ -41,7 +42,7 @@
     table.appendChild(tr)
   };
 
-  const onBlurData = (ev) => {
+  const checkAndUpdateCell = (ev) => {
     const tableCell = ev.currentTarget;
     const tableCellData = ev.currentTarget.innerHTML;
     const tableRow = tableCell.parentNode.classList.value;
@@ -97,7 +98,7 @@
         td.appendChild(document.createTextNode(paginatedList[i][key]));
         td.contentEditable="true";
         td.onblur = (ev) => {
-          onBlurData(ev);
+          checkAndUpdateCell(ev);
         }
         tr.appendChild(td);
       }
@@ -219,26 +220,17 @@
     }
   };
 
-  const goToPreviousPage = (ev) => {
-    resetForm();
-    const activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
-    const previousPage = document.getElementsByClassName(`page-${activePage-1}`)[0];
-    previousPage.click();
+  const runner = () => {
+    table = document.createElement('table');
+    table.classList.add('data-table');
+    createTableHeadings();
+    loadTable(jsonSampleData);
+    fragment.appendChild(table);
+    body.appendChild(fragment);
+    buildTableControls(jsonSampleData.length);
   };
 
-  const goToNextPage = (ev) => {
-    resetForm();
-    let activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
-    activePage = parseInt(activePage);
-    const nextPage = document.getElementsByClassName(`page-${activePage+1}`)[0];
-    nextPage.click();
-  };
+  window.buildTable = buildTable;
+  runner();
 
-  table = document.createElement('table');
-  table.classList.add('data-table');
-  createTableHeadings();
-  buildTable(jsonSampleData);
-  fragment.appendChild(table);
-  body.appendChild(fragment);
-  buildTableControls(jsonSampleData.length);
 })();

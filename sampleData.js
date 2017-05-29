@@ -1,4 +1,4 @@
-const jsonSampleData = [
+var jsonSampleData = [
   { 'firstName': 'Rita',
     'lastName': 'Greenfelder',
     'age': 8,
