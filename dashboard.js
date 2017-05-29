@@ -16,7 +16,7 @@
     input.type = 'text';
     input.placeholder = 'Search';
     input.onkeyup = (ev) => {
-      filterTable(ev);
+      searchTable(ev);
     };
     input.classList.add('search-box');
     form.appendChild(input);
@@ -33,14 +33,16 @@
 
     if (checkBox.classList.contains(`data-toggle--hidden`)) {
       columnHeading.style.display = '';
-      for (let i = 0; i < columnDatas.length; i++) {
+      const columnDatasLength = columnDatas.length;
+      for (let i = 0; i < columnDatasLength; i++) {
         columnDatas[i].style.display = '';
       }
       checkBox.classList.remove(`data-toggle--hidden`);
       checkBox.classList.add(`data-toggle--visible`);
     } else {
       columnHeading.style.display = 'none';
-      for (let i = 0; i < columnDatas.length; i++) {
+      const columnDatasLength = columnDatas.length;
+      for (let i = 0; i < columnDatasLength; i++) {
         columnDatas[i].style.display = 'none';
       }
       checkBox.classList.remove(`data-toggle--visible`);
@@ -50,17 +52,17 @@
 
   window.toggleDataColumns = toggleDataColumns;
 
-  const filterTable = (ev) => {
-
+  const searchTable = (ev) => {
     let form, input, filter, table, tr, td, i;
     form = document.getElementsByClassName('search-form')[0];
     input = document.getElementsByClassName('search-box')[0];
     filter = input.value.toUpperCase();
     tr = document.getElementsByClassName('table-row-data');
-
-    for (let i = 0; i < tr.length; i++) {
+    const trLength = tr.length;
+    for (let i = 0; i < trLength; i++) {
       td = tr[i].childNodes;
-      for (let j = 0; j < td.length; j++) {
+      const tdLength = td.length;
+      for (let j = 0; j < tdLength; j++) {
         if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
           td[j].parentNode.style.display = '';
           break;
@@ -71,7 +73,8 @@
     }
     if (ev.keyCode == 27) {
       form.reset();
-      for (let i = 0; i < tr.length; i++) {
+      const trLength = tr.length;
+      for (let i = 0; i < trLength; i++) {
         tr[i].style.display = '';
       }
     }

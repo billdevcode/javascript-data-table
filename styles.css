@@ -37,16 +37,13 @@ html, body {
   padding: 20px;
   border: 1px solid gray;
   cursor: pointer;
+  background-color: silver;
 }
 
 .table-row-data td {
   padding: 2px;
   border: 1px solid silver;
   text-align: center;
-}
-
-.table-row-data:nth-child(odd) {
-  background-color: linen;
 }
 
 .table-controls-bar {
@@ -58,25 +55,22 @@ html, body {
 
 .table-controls-pages,
 .table-controls {
-  margin-right: 10px;
+  margin: 10px;
   padding: 10px;
   outline: none;
-  text-decoration: none;
   border: none;
   background-color: white;
-  color: darkslateblue;
+  color: black;
   font-size: 14px;
   cursor: pointer;
 }
 
+.table-controls-pages:hover,
+.table-controls:hover {
+  text-decoration: underline;
+}
+
 .table-controls-pages--active {
   background-color: silver;
-}
-
-.table-controls-previous {
-  float: left;
-}
-
-.table-controls-next {
-  float: right;
+  color: white;
 }

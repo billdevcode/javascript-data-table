@@ -1,6 +1,11 @@
 var sortedData = [];
 var cacheData = {};
 
+const resetForm = () => {
+  const form = document.getElementsByClassName('search-form')[0];
+  form.reset();
+}
+
 const sortDataAsc = (key, data) => {
   if (cacheData[key] && cacheData[key].asc) {
     sortedData = cacheData[key].asc;
@@ -39,7 +44,8 @@ const sortDataDesc = (key, data) => {
 
 const initPage1Button = () => {
   let allPageButtons = document.getElementsByClassName('table-controls-pages');
-  for (let i = 0; i < allPageButtons.length; i++) {
+  const allPageButtonsLength = allPageButtons.length;
+  for (let i = 0; i < allPageButtonsLength; i++) {
     allPageButtons[i].classList.remove('table-controls-pages--active');
   }
   let page1Button = document.getElementsByClassName('page-1')[0];
