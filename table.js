@@ -106,9 +106,20 @@
   };
 
   const buildTable = (dataCollection) => {
-    const dataCollectionLength = dataCollection.length;
     const paginatedList = createPaginationList(dataCollection);
     createPaginatedTable(paginatedList);
+  };
+
+  const loadTable = (dataCollection) => {
+    if (dataCollection.length < 100) {
+      buildTable(dataCollection);
+    } else {
+      let apiRequest = new XMLHttpRequest();
+      apiRequest.addEventListener("load", buildTableWithApi);
+      // NOTE replace fake url with real json api endpoint
+      apiRequest.open("GET", "https://example.com/sampleData");
+      apiRequest.send();
+    }
   };
 
   const buildPreviousPageButtons = () => {

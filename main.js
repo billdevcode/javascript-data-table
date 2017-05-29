@@ -1,4 +1,10 @@
-var sortedData = [];
+// Helper functions
+var sortedData;
+
+const buildTableWithApi = (data) => {
+  const table = JSON.parse(data.target.response);
+  window.buildTable(table.products);
+}
 
 const resetForm = () => {
   const form = document.getElementsByClassName('search-form')[0];
