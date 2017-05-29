@@ -23,13 +23,13 @@
 
     fragment.appendChild(div);
     body.appendChild(fragment);
-  }
+  };
 
   const toggleDataColumns = (ev, key) => {
     ev.stopPropagation();
-    let checkBox = ev.currentTarget;
-    let columnDatas = document.getElementsByClassName(`${key}-data`);
-    let columnHeading = document.getElementsByClassName(`${key}-heading`)[0];
+    const checkBox = ev.currentTarget;
+    const columnDatas = document.getElementsByClassName(`${key}-data`);
+    const columnHeading = document.getElementsByClassName(`${key}-heading`)[0];
 
     if (checkBox.classList.contains(`data-toggle--hidden`)) {
       columnHeading.style.display = '';
@@ -48,9 +48,7 @@
       checkBox.classList.remove(`data-toggle--visible`);
       checkBox.classList.add(`data-toggle--hidden`);
     }
-  }
-
-  window.toggleDataColumns = toggleDataColumns;
+  };
 
   const searchTable = (ev) => {
     let form, input, filter, table, tr, td, i;
@@ -78,8 +76,9 @@
         tr[i].style.display = '';
       }
     }
-  }
+  };
 
+  window.toggleDataColumns = toggleDataColumns;
   createDashboard();
 
 })();

@@ -3,30 +3,12 @@
   const body = document.body;
   const fragment = document.createDocumentFragment();
   const tableHeadings = [
-    {
-      key: 'firstName',
-      title: 'First Name'
-    },
-    {
-      key: 'lastName',
-      title: 'Last Name'
-    },
-    {
-      key: 'age',
-      title: 'Age'
-    },
-    {
-      key: 'position',
-      title: 'Position'
-    },
-    {
-      key: 'office',
-      title: 'Office'
-    },
-    {
-      key: 'phone',
-      title: 'Phone'
-    }
+    { key: 'firstName', title: 'First Name' },
+    { key: 'lastName', title: 'Last Name' },
+    { key: 'age', title: 'Age' },
+    { key: 'position', title: 'Position' },
+    { key: 'office', title: 'Office' },
+    { key: 'phone', title: 'Phone' }
   ];
   const paginationRow = 10;
   const paginationList = {};
@@ -39,10 +21,7 @@
     for (let i = 0; i < tableHeadingsLength; i++) {
       th = document.createElement('th');
       th.appendChild(document.createTextNode(tableHeadings[i].title));
-      th.classList.add(`${tableHeadings[i].key}-heading`);
-      th.style.backgroundImage = 'url("./assets/sort.png")';
-      th.style.backgroundRepeat = 'no-repeat';
-      th.style.backgroundPosition = 'right';
+      th.classList.add(`${tableHeadings[i].key}-heading`, 'row-headings');
       th.onclick = (ev, key) => {
         clickToSortData(ev, tableHeadings[i].key);
       };
@@ -60,7 +39,7 @@
       tr.appendChild(th);
     }
     table.appendChild(tr)
-  }
+  };
 
   const onBlurData = (ev) => {
     const tableCell = ev.currentTarget;
@@ -74,12 +53,12 @@
     if (tableCellData !== paginationList[rowKey][rowNum-1][cellKey]) {
       paginationList[rowKey][rowNum-1][cellKey] = tableCellData;
     }
-  }
+  };
 
   const clearTableData = () => {
     const table = document.getElementsByClassName("data-table");
     table[0].innerHTML = '';
-  }
+  };
 
   const clickToSortData = (ev, key) => {
     resetForm();
@@ -93,7 +72,7 @@
       buildTable(sortDataAsc(key, jsonSampleData));
     }
     initPage1Button();
-  }
+  };
 
   const createPaginationList = (data) => {
     let count = 1;
@@ -103,7 +82,7 @@
       count++;
     }
     return paginationList;
-  }
+  };
 
   const createPaginatedTable = (data, paginatedListKey=1) => {
     const paginatedList = data[paginatedListKey];
@@ -124,24 +103,15 @@
       }
       table.appendChild(tr)
     }
-  }
+  };
 
   const buildTable = (dataCollection) => {
     const dataCollectionLength = dataCollection.length;
     const paginatedList = createPaginationList(dataCollection);
     createPaginatedTable(paginatedList);
-  }
+  };
 
-  const buildTableControls = (tableLength) => {
-    let tableControls = document.getElementsByClassName('table-controls-bar')[0];
-    if (tableControls !== undefined) {
-      tableControls.innerHTML = '';
-      div = tableControls;
-    } else {
-      div = document.createElement('div');
-      div.classList.add('table-controls-bar');
-    }
-
+  const buildPreviousPageButtons = () => {
     span = document.createElement('span');
     span.classList.add('table-controls-left');
     btn = document.createElement('button');
@@ -151,8 +121,10 @@
       goToPreviousPage(ev);
     }
     span.appendChild(btn);
-    div.appendChild(span);
+    return span;
+  };
 
+  const buildTableControlsPageButtons = (tableLength) => {
     span = document.createElement('span');
     let count = 1, pageNum;
     for (let i = 0; i < tableLength; i+paginationRow) {
@@ -166,8 +138,10 @@
       i+=paginationRow;
       count++;
     }
-    div.appendChild(span);
+    return span;
+  };
 
+  const buildNextPageButtons = () => {
     span = document.createElement('span');
     span.classList.add('table-controls-right');
     btn = document.createElement('button');
@@ -177,23 +151,48 @@
       goToNextPage(ev);
     }
     span.appendChild(btn);
+    return span;
+  };
 
-    div.appendChild(span);
-    body.appendChild(div);
-    let firstPageButton = document.getElementsByClassName('page-1')[0];
+  const pageButtonsInit = (tableLength) => {
+    const firstPageButton = document.getElementsByClassName('page-1')[0];
     firstPageButton.classList.add('table-controls-pages--active');
-    let previousButton = document.getElementsByClassName('table-controls-previous')[0];
+    const previousButton = document.getElementsByClassName('table-controls-previous')[0];
     previousButton.style.visibility = 'hidden';
     if (tableLength <= paginationRow) {
-      let nextButton = document.getElementsByClassName('table-controls-next')[0];
+      const nextButton = document.getElementsByClassName('table-controls-next')[0];
       nextButton.style.visibility = 'hidden';
     }
-  }
+  };
+
+  const buildTableControls = (tableLength) => {
+    const tableControls = document.getElementsByClassName('table-controls-bar')[0];
+    if (tableControls !== undefined) {
+      tableControls.innerHTML = '';
+      div = tableControls;
+    } else {
+      div = document.createElement('div');
+      div.classList.add('table-controls-bar');
+    }
+
+    span = buildPreviousPageButtons();
+    div.appendChild(span);
+
+    span = buildTableControlsPageButtons(tableLength)
+    div.appendChild(span);
+
+    span = buildNextPageButtons();
+    div.appendChild(span);
+
+    body.appendChild(div);
+
+    pageButtonsInit(tableLength);
+  };
 
   const goToPage = (ev) => {
-    let pageButton = ev.currentTarget;
-    let pageNumber = pageButton.innerHTML;
-    let allPageButtons = document.getElementsByClassName('table-controls-pages');
+    const pageButton = ev.currentTarget;
+    const pageNumber = pageButton.innerHTML;
+    const allPageButtons = document.getElementsByClassName('table-controls-pages');
     resetForm();
 
     if (!pageButton.classList.contains('table-controls-pages--active')) {
@@ -207,22 +206,22 @@
       createTableHeadings();
       createPaginatedTable(paginationList, pageNumber);
     }
-  }
+  };
 
   const goToPreviousPage = (ev) => {
     resetForm();
-    let activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
-    let previousPage = document.getElementsByClassName(`page-${activePage-1}`)[0];
+    const activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
+    const previousPage = document.getElementsByClassName(`page-${activePage-1}`)[0];
     previousPage.click();
-  }
+  };
 
   const goToNextPage = (ev) => {
     resetForm();
     let activePage = document.getElementsByClassName('table-controls-pages--active')[0].innerHTML;
     activePage = parseInt(activePage);
-    let nextPage = document.getElementsByClassName(`page-${activePage+1}`)[0];
+    const nextPage = document.getElementsByClassName(`page-${activePage+1}`)[0];
     nextPage.click();
-  }
+  };
 
   table = document.createElement('table');
   table.classList.add('data-table');

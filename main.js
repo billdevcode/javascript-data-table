@@ -4,7 +4,7 @@ var cacheData = {};
 const resetForm = () => {
   const form = document.getElementsByClassName('search-form')[0];
   form.reset();
-}
+};
 
 const sortDataAsc = (key, data) => {
   if (cacheData[key] && cacheData[key].asc) {
@@ -22,7 +22,7 @@ const sortDataAsc = (key, data) => {
     cacheData[key] = { asc: [].concat(sortedData) };
   }
   return sortedData;
-}
+};
 
 const sortDataDesc = (key, data) => {
   if (cacheData[key] && cacheData[key].desc) {
@@ -40,21 +40,21 @@ const sortDataDesc = (key, data) => {
     cacheData[key] = { desc: [].concat(sortedData) };
   }
   return sortedData;
-}
+};
 
 const initPage1Button = () => {
-  let allPageButtons = document.getElementsByClassName('table-controls-pages');
+  const allPageButtons = document.getElementsByClassName('table-controls-pages');
   const allPageButtonsLength = allPageButtons.length;
   for (let i = 0; i < allPageButtonsLength; i++) {
     allPageButtons[i].classList.remove('table-controls-pages--active');
   }
-  let page1Button = document.getElementsByClassName('page-1')[0];
+  const page1Button = document.getElementsByClassName('page-1')[0];
   page1Button.classList.add('table-controls-pages--active');
-}
+};
 
 const hidePreviousAndNextButtons = (pageNumber, buttonsLength) => {
-  let previousButton = document.getElementsByClassName('table-controls-previous')[0];
-  let nextButton = document.getElementsByClassName('table-controls-next')[0];
+  const previousButton = document.getElementsByClassName('table-controls-previous')[0];
+  const nextButton = document.getElementsByClassName('table-controls-next')[0];
 
   if (pageNumber === '1') {
     previousButton.style.visibility = 'hidden';
@@ -67,4 +67,4 @@ const hidePreviousAndNextButtons = (pageNumber, buttonsLength) => {
   } else {
     nextButton.style.visibility = 'visible';
   }
-}
+};
