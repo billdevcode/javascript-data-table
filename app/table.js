@@ -112,7 +112,7 @@
   };
 
   const loadTable = (dataCollection) => {
-    if (dataCollection.length < 100) {
+    if (dataCollection.length <= 100) {
       buildTable(dataCollection);
     } else {
       let apiRequest = new XMLHttpRequest();

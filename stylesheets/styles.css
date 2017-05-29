@@ -39,7 +39,7 @@ html, body {
   border: 1px solid gray;
   cursor: pointer;
   background-color: silver;
-  background-image: url("./assets/sort.png");
+  background-image: url("../assets/sort.png");
   background-position: right;
   background-repeat: no-repeat;
   font-size: 16px;
